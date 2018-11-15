@@ -37,15 +37,20 @@
 	</div>
 	<div>
 		<ul class="pagination" th:with="current=${result.pageable}">
+		
+			<th:block th:with="prev=${current.previous()}">
 			
-			<th:block th:with="prev=${current.previousOrFirst()}">
-			<li class="page-item" th:if="${prev.pageNumber > 0}"><a class="page-link" href="#">[[${prev.pageNumber + 1}]]</a></li>
-			</th:block>
-			<li class="page-item"><a class="page-link" href="#">[[${current.pageNumber + 1}]]</a></li>
+			  <li class="page-item" th:if="${result.hasPrevious()}" ><a class="page-link" href="#">[[${prev.pageNumber + 1}]]</a></li>
+			  
+			</th:block>			
+			
+			<li class="page-item active"><a class="page-link" href="#">[[${current.pageNumber + 1}]]</a></li>
+			
 			<th:block th:with="next=${current.next()}">
-			<li class="page-item" th:if="${next != null}"><a class="page-link" href="#">[[${next.pageNumber + 1}]]</a></li>
-			</th:block>
 			
+			<li class="page-item" th:if="${result.hasNext()}"><a class="page-link" href="#">[[${next.pageNumber + 1}]]</a></li>
+			
+			</th:block>
 		</ul>
 	</div>
 </div>
